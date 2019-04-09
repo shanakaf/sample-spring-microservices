@@ -1,6 +1,4 @@
- using hostname.
 
-[code language="java"]
 node {
 
     withMaven(maven:'maven') {
@@ -16,7 +14,5 @@ node {
             print pom.version
             env.version = pom.version
         }     
-
     }
-
 }
