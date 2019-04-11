@@ -1,18 +1,11 @@
 
 node {
-
-    withMaven(maven:'maven') {
-
-        stage('Checkout') {
-            git url: 'https://github.com/piomin/sample-spring-microservices.git', credentialsId: 'githubId', branch: 'develop'
-        }
-
-        stage('Build') {
-            sh 'mvn clean install'
-
-            def pom = readMavenPom file:'pom.xml'
-            print pom.version
-            env.version = pom.version
-        }     
+    stage('Checkout') {
+        git branch: 'develop', credentialsId: 'githubId', url: 'https://github.com/shanakaf/sample-spring-microservices'
     }
+
+    stage('Build') {
+        def mvnHome = tool name: 'maven-3', type: 'maven'
+        sh "${mvnHome}/bin/mvn clean install"
+    }     
 }
